@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('travels', function (Blueprint $table) {
             //$table->id();
             $table->uuid('id')->primary();
+            $table->boolean('is_public')->default(false);
+            $table->string('slug')->unique();
             $table->string('name');
+            $table->text('description');
+            $table->unsignedInteger('number_of_days');
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('travels');
     }
 };
